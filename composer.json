@@ -11,10 +11,8 @@
     }
   },
   "config": {
-    "sort-packages": true,
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": false
-    }
+    "allow-plugins": false,
+    "sort-packages": true
   },
   "description": "Set of short PHP helpers",
   "funding": [
