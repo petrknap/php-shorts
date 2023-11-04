@@ -4,7 +4,7 @@ namespace PetrKnap\Shorts;
 
 use PHPUnit\Framework\TestCase;
 
-class ArrayShortsTest extends TestCase
+final class ArrayShortsTest extends TestCase
 {
     /** @dataProvider dataKeyMapWorksWhenCalledWithOneKey */
     public function testKeyMapWorksWhenCalledWithOneKey(string $key, string $expect): void
@@ -14,14 +14,14 @@ class ArrayShortsTest extends TestCase
         ];
         $expected[$key] = $expect;
 
-        static::assertSame($expected, ArrayShorts::keyMap([$this, 'keyMapModifier'], $array, $key));
+        self::assertSame($expected, ArrayShorts::keyMap([$this, 'keyMapModifier'], $array, $key));
     }
 
     public static function dataKeyMapWorksWhenCalledWithOneKey(): array
     {
         return [
-            'known key' => ['a', static::keyMapModifier(1, 'a')],
-            'unknown key' => ['b', static::keyMapModifier(null, 'b')],
+            'known key' => ['a', self::keyMapModifier(1, 'a')],
+            'unknown key' => ['b', self::keyMapModifier(null, 'b')],
         ];
     }
 
@@ -32,11 +32,11 @@ class ArrayShortsTest extends TestCase
             'b' => 2,
         ];
         $expected = [
-            'a' => static::keyMapModifier(1, 'a'),
-            'b' => static::keyMapModifier(2, 'b'),
-            'c' => static::keyMapModifier(null, 'c'),
+            'a' => self::keyMapModifier(1, 'a'),
+            'b' => self::keyMapModifier(2, 'b'),
+            'c' => self::keyMapModifier(null, 'c'),
         ];
-        static::assertSame($expected, ArrayShorts::keyMap([$this, 'keyMapModifier'], $array, 'a', 'b', 'c'));
+        self::assertSame($expected, ArrayShorts::keyMap([$this, 'keyMapModifier'], $array, 'a', 'b', 'c'));
     }
 
     public static function keyMapModifier(?int $v, string $k): string
