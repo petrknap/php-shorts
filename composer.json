@@ -1,5 +1,5 @@
 {
-  "WARNING": "This file is updated automatically. All keys will be overwritten, except of 'autoload.files', 'config.allow-plugins', 'conflict', 'keywords', 'require', 'require-dev' and 'scripts'.",
+  "WARNING": "This file is updated automatically. All keys will be overwritten, except of 'conflict', 'keywords', 'require', 'require-dev' and 'scripts'.",
   "autoload": {
     "psr-4": {
       "PetrKnap\\Shorts\\": "src"
@@ -16,7 +16,7 @@
       "dealerdirect/phpcodesniffer-composer-installer": false
     }
   },
-  "description": "php-shorts",
+  "description": "Set of short PHP helpers",
   "funding": [
     {
       "type": "other",
