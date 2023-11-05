@@ -6,7 +6,8 @@ use PHPUnit\Framework\TestCase;
 
 final class MarkdownShortsTest extends TestCase
 {
-    public function testEvaluatesPhpExample(): void
+    /** @group MarkdownShorts::evaluatePhpExample */
+    public function testEvaluatesGivenExampleAsPhpCodeAndReturnsOutput(): void
     {
         self::assertSame(
             'NULL' . PHP_EOL,
@@ -14,7 +15,8 @@ final class MarkdownShortsTest extends TestCase
         );
     }
 
-    public function testEvaluatesPhpExamplesInSharedContext(): void
+    /** @group MarkdownShorts::evaluatePhpExample */
+    public function testEvaluatesGivenExamplesAsPhpCodeInSharedContextAndReturnsOutput(): void
     {
         MarkdownShorts::evaluatePhpExample('function f(int $x): int { return $x + 1; }');
         self::assertSame(
@@ -23,7 +25,8 @@ final class MarkdownShortsTest extends TestCase
         );
     }
 
-    public function testExtractsPhpExamples(): void
+    /** @group MarkdownShorts::extractPhpExamples */
+    public function testExtractsPhpExamplesFromGivenContent(): void
     {
         self::assertSame(
             [
