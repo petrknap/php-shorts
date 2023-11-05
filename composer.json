@@ -22,7 +22,11 @@
     }
   ],
   "homepage": "https://github.com/petrknap/php-shorts",
-  "keywords": [],
+  "keywords": [
+    "helper",
+    "array",
+    "markdown"
+  ],
   "license": "LGPL-3.0-or-later",
   "name": "petrknap/shorts",
   "require": {

@@ -6,8 +6,11 @@ use PHPUnit\Framework\TestCase;
 
 final class ArrayShortsTest extends TestCase
 {
-    /** @dataProvider dataKeyMapWorksWhenCalledWithOneKey */
-    public function testKeyMapWorksWhenCalledWithOneKey(string $key, string $expect): void
+    /**
+     * @group ArrayShorts::keyMap
+     * @dataProvider dataAppliesCallbackToElementSpecifiedByKeyOfGivenArray
+     */
+    public function testAppliesCallbackToElementSpecifiedByKeyOfGivenArray(string $key, string $expect): void
     {
         $expected = $array = [
             'a' => 1,
@@ -17,7 +20,7 @@ final class ArrayShortsTest extends TestCase
         self::assertSame($expected, ArrayShorts::keyMap([$this, 'keyMapModifier'], $array, $key));
     }
 
-    public static function dataKeyMapWorksWhenCalledWithOneKey(): array
+    public static function dataAppliesCallbackToElementSpecifiedByKeyOfGivenArray(): array
     {
         return [
             'known key' => ['a', self::keyMapModifier(1, 'a')],
@@ -25,7 +28,8 @@ final class ArrayShortsTest extends TestCase
         ];
     }
 
-    public function testKeyMapWorksWhenCalledWithMultipleKeys(): void
+    /** @group ArrayShorts::keyMap */
+    public function testAppliesCallbackToElementsSpecifiedByKeysOfGivenArray(): void
     {
         $array = [
             'a' => 1,
