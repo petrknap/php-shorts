@@ -2,7 +2,7 @@
 
 namespace PetrKnap\Shorts\PhpUnit;
 
-use LogicException;
+use OutOfRangeException;
 use PetrKnap\Shorts\MarkdownShorts;
 use Traversable;
 
@@ -32,7 +32,7 @@ trait MarkdownFileTestTrait
             $expectedOutput = array_shift($expectedOutputs);
 
             if ($expectedOutputId === null) {
-                throw new class ('Missing expect') extends LogicException implements MarkdownFileTestException {
+                throw new class ('Missing expect') extends OutOfRangeException implements MarkdownFileTestException {
                 };
             }
 
@@ -40,7 +40,7 @@ trait MarkdownFileTestTrait
         }
 
         if (!empty($expectedOutputs)) {
-            throw throw new class ('Missing example') extends LogicException implements MarkdownFileTestException {
+            throw throw new class ('Missing example') extends OutOfRangeException implements MarkdownFileTestException {
             };
         }
     }
