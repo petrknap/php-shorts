@@ -9,8 +9,11 @@ use Traversable;
 trait MarkdownFileTestTrait
 {
     /** @dataProvider dataPhpExamplesGivenInMarkdownFileWork */
-    public function testPhpExamplesGivenInMarkdownFileWork(string $example, string $expectedOutput): void
+    public function testPhpExamplesGivenInMarkdownFileWork(string $example, ?string $expectedOutput): void
     {
+        if ($expectedOutput === null) {
+            self::markTestSkipped();
+        }
         static::assertSame(
             $expectedOutput,
             MarkdownShorts::evaluatePhpExample($example)

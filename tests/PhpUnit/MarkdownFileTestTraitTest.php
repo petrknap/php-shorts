@@ -15,6 +15,9 @@ final class MarkdownFileTestTraitTest extends TestCase implements MarkdownFileTe
 
     public static function getExpectedOutputsOfPhpExamples(): iterable
     {
-        yield 'hello-world' => 'Hello, World!';
+        return [
+            'echo-hello-world' => 'Hello, World!',
+            'log-hello-world' => null,
+        ];
     }
 }
