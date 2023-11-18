@@ -17,8 +17,4 @@ RUN apt-get update \
 ;
 # endregion
 
-# region included composer-library
 WORKDIR /app
-COPY . .
-RUN composer update --prefer-lowest
-# endregion

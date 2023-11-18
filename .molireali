@@ -4,7 +4,7 @@ dockerfile php 8.0-cli
 docker-scripts petrknap/php-shorts
 donation
 git-crlf "*.bat"
-github-workflow docker "composer ci-script"
+github-workflow docker 'composer ci-script' 'COMPOSER_CACHE_DIR=$CACHE_DIR composer update --prefer-lowest'
 github-workflow linter-docker
 github-workflow linter-php 8.0
 license LGPL-3.0-or-later
