@@ -1,5 +1,5 @@
 {
-  "WARNING": "This file is updated automatically. All keys will be overwritten, except of 'conflict', 'keywords', 'require', 'require-dev' and 'scripts'.",
+  "WARNING": "This file is updated automatically. All keys will be overwritten, except of 'conflict', 'keywords', 'require', 'require-dev', 'scripts' and 'suggest'.",
   "autoload": {
     "psr-4": {
       "PetrKnap\\Shorts\\": "src"
@@ -34,7 +34,7 @@
     "php": ">=8.0"
   },
   "require-dev": {
-    "nunomaduro/phpinsights": "^2.9",
+    "nunomaduro/phpinsights": "^2.11",
     "phpstan/phpstan": "^1.10",
     "phpunit/phpunit": "^9.6",
     "squizlabs/php_codesniffer": "^3.7"
@@ -45,7 +45,7 @@
       "phpcs --colors --standard=PSR12 --exclude=PSR12.Files.OpenTag,PSR12.Files.FileHeader,Generic.Files.LineLength src tests",
       "phpstan analyse --level max src",
       "phpstan analyse --level 5 tests",
-      "phpinsights analyse src"
+      "phpinsights analyse src --ansi --no-interaction"
     ],
     "ci-script": [
       "@validate",
