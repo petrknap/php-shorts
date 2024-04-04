@@ -6,6 +6,9 @@ namespace PetrKnap\Shorts\Exception;
 
 use Throwable;
 
-interface ShortsException extends Throwable
+/**
+ * @internal domain exception
+ */
+interface Exception extends Throwable
 {
 }

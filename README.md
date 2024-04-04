@@ -1,7 +1,42 @@
 # Set of short PHP helpers
 
+* `Exception`s
+  * [`CouldNotProcessData` template](#exceptioncouldnotprocessdata-template)
+  * [`NotImplemented`](#exceptionnotimplemented)
 * [`HasRequirements` trait](#hasrequirements-trait)
 
+## [`Exception\CouldNotProcessData` template](./src/Exception/CouldNotProcessData.php)
+
+Template for an exception that indicates that the data could not be processed.
+
+```php
+namespace PetrKnap\Shorts;
+
+interface ImageResizerException extends \Throwable {}
+
+/** @extends Exception\CouldNotProcessData<string> */
+final class ImageResizerCouldNotResizeImage extends Exception\CouldNotProcessData implements ImageResizerException {}
+
+final class ImageResizer {
+    public function resize(string $image) {
+        throw new ImageResizerCouldNotResizeImage(__METHOD__, $image);
+    }
+}
+```
+
+## [`Exception\NotImplemented`](./src/Exception/NotImplemented.php)
+
+Simple exception for prototyping purposes.
+
+```php
+namespace PetrKnap\Shorts;
+
+final class StringablePrototype implements \Stringable {
+    public function __toString(): string {
+        Exception\NotImplemented::throw(__METHOD__);
+    }
+}
+```
 
 ## [`HasRequirements` trait](./src/HasRequirements.php)
 

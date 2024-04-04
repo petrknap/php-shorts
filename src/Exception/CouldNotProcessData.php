@@ -8,7 +8,7 @@ use RuntimeException;
 use Throwable;
 
 /**
- * This is a template, not a real {@see ShortsException}
+ * This is a template, not a real {@see Exception}
  *
  * @template TData of mixed
  */
@@ -19,8 +19,8 @@ abstract class CouldNotProcessData extends RuntimeException
      */
     public function __construct(
         string $method,
-        private mixed $data,
-        ?Throwable $reason = null,
+        public readonly mixed $data,
+        public readonly Throwable|null $reason = null,
     ) {
         parent::__construct(
             sprintf(
@@ -33,6 +33,8 @@ abstract class CouldNotProcessData extends RuntimeException
     }
 
     /**
+     * @deprecated use readonly property $data
+     *
      * @return TData
      */
     public function getData(): mixed

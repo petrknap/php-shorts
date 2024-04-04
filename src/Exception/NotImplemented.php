@@ -6,7 +6,7 @@ namespace PetrKnap\Shorts\Exception;
 
 use LogicException;
 
-final class NotImplemented extends LogicException implements ShortsException
+final class NotImplemented extends LogicException implements Exception
 {
     public function __construct(
         string $something,
@@ -19,6 +19,11 @@ final class NotImplemented extends LogicException implements ShortsException
         );
     }
 
+    /**
+     * Prototyping helper
+     *
+     * @throws self
+     */
     public static function throw(?string $something = null): never
     {
         throw new self($something ?? 'This');

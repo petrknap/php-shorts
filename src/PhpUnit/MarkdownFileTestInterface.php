@@ -10,9 +10,15 @@ interface MarkdownFileTestInterface
 
     public function testPhpExamplesGivenInMarkdownFileWork(string $example, string $expectedOutput): void;
 
-    /** @return iterable<string, array<string>> */
+    /**
+     * @return iterable<string, array<string>>
+     *
+     * @throws Exception\MarkdownFileTestException
+     */
     public static function dataPhpExamplesGivenInMarkdownFileWork(): iterable;
 
-    /** @return iterable<int|string, ?string> null values will be skipped */
+    /**
+     * @return iterable<int|string, ?string> null values will be skipped
+     */
     public static function getExpectedOutputsOfPhpExamples(): iterable;
 }
