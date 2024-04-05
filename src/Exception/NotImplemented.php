@@ -19,6 +19,11 @@ final class NotImplemented extends LogicException implements ShortsException
         );
     }
 
+    /**
+     * Prototyping helper
+     *
+     * @throws self
+     */
     public static function throw(?string $something = null): void
     {
         throw new self($something ?? 'This');

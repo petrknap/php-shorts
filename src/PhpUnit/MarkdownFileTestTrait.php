@@ -6,6 +6,7 @@ namespace PetrKnap\Shorts\PhpUnit;
 
 use OutOfRangeException;
 use PetrKnap\Shorts\MarkdownShorts;
+use PetrKnap\Shorts\PhpUnit\Exception\MarkdownFileTestException;
 use Traversable;
 
 trait MarkdownFileTestTrait
