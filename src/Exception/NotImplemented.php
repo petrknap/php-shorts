@@ -19,7 +19,7 @@ final class NotImplemented extends LogicException implements ShortsException
         );
     }
 
-    public static function throw(?string $something = null): void
+    public static function throw(?string $something = null): never
     {
         throw new self($something ?? 'This');
     }
