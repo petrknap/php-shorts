@@ -1,6 +1,30 @@
 # Set of short PHP helpers
 
-Ignore this repository with a clear conscience, it contains nothing interesting.
+* [`HasRequirements` trait](#hasrequirements-trait)
+
+
+## [`HasRequirements` trait](./src/HasRequirements.php)
+
+Simple trait to check if requirements of your code are fulfilled.
+
+```php
+namespace PetrKnap\Shorts;
+
+final class ServiceWithRequirements {
+    use HasRequirements;
+    
+    public function __construct() {
+        self::checkRequirements(functions: ['required_function']);
+    }
+
+    public function do(): void {
+        required_function();
+    }
+}
+```
+
+It should not replace [Composers](https://getcomposer.org/) [`require`s](https://getcomposer.org/doc/04-schema.md#require),
+but it could improve them and check [`suggest`s](https://getcomposer.org/doc/04-schema.md#suggest).
 
 ---
 
