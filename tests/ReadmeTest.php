@@ -18,6 +18,8 @@ final class ReadmeTest extends TestCase implements PhpUnit\MarkdownFileTestInter
     public static function getExpectedOutputsOfPhpExamples(): iterable
     {
         return [
+            'exceptioncouldnotprocessdata-template' => '',
+            'exceptionnotimplemented' => '',
             'hasrequirements-trait' => '',
         ];
     }

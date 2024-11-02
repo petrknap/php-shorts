@@ -6,7 +6,7 @@ namespace PetrKnap\Shorts\Exception;
 
 use LogicException;
 
-final class MissingRequirement extends LogicException implements ShortsException
+final class MissingRequirement extends LogicException implements Exception
 {
     /**
      * @param class-string $className

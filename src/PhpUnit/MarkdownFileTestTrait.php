@@ -6,8 +6,14 @@ namespace PetrKnap\Shorts\PhpUnit;
 
 use OutOfRangeException;
 use PetrKnap\Shorts\MarkdownShorts;
+use PHPUnit\Framework\TestCase;
 use Traversable;
 
+/**
+ * @psalm-require-implements MarkdownFileTestInterface
+ *
+ * @mixin TestCase
+ */
 trait MarkdownFileTestTrait
 {
     /** @dataProvider dataPhpExamplesGivenInMarkdownFileWork */
@@ -37,7 +43,7 @@ trait MarkdownFileTestTrait
             $expectedOutput = array_shift($expectedOutputs);
 
             if ($expectedOutputId === null) {
-                throw new class ('Missing expect') extends OutOfRangeException implements MarkdownFileTestException {
+                throw new class ('Missing expect') extends OutOfRangeException implements Exception\MarkdownFileTestException {
                 };
             }
 
@@ -45,7 +51,7 @@ trait MarkdownFileTestTrait
         }
 
         if (!empty($expectedOutputs)) {
-            throw throw new class ('Missing example') extends OutOfRangeException implements MarkdownFileTestException {
+            throw throw new class ('Missing example') extends OutOfRangeException implements Exception\MarkdownFileTestException {
             };
         }
     }

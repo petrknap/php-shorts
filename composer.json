@@ -14,6 +14,9 @@
     "allow-plugins": false,
     "sort-packages": true
   },
+  "conflict": {
+    "phpunit/phpunit": "<9|>=11"
+  },
   "description": "Set of short PHP helpers",
   "funding": [
     {
@@ -60,5 +63,8 @@
       "@check-requirements",
       "@test-implementation"
     ]
+  },
+  "suggest": {
+    "phpunit/phpunit": "Required by PHP Unit helpers"
   }
 }
