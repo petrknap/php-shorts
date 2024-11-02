@@ -15,7 +15,7 @@
     "sort-packages": true
   },
   "conflict": {
-    "phpunit/phpunit": "<9|>=11"
+    "phpunit/phpunit": "<9|>=12"
   },
   "description": "Set of short PHP helpers",
   "funding": [
