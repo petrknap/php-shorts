@@ -7,7 +7,7 @@ namespace PetrKnap\Shorts\Exception;
 use Throwable;
 
 /**
- * @internal domain exception
+ * @internal root exception
  */
 interface Exception extends Throwable
 {
