@@ -15,7 +15,8 @@
     "sort-packages": true
   },
   "conflict": {
-    "phpunit/phpunit": "<9|>=12"
+    "phpunit/phpunit": "<9|>=12",
+    "symfony/process": "<4|>=8"
   },
   "description": "Set of short PHP helpers",
   "funding": [
@@ -29,7 +30,10 @@
     "array",
     "helper",
     "markdown",
-    "phpunit"
+    "phpunit",
+    "filter",
+    "filter-command",
+    "external-filter"
   ],
   "license": "LGPL-3.0-or-later",
   "name": "petrknap/shorts",
@@ -38,6 +42,7 @@
   },
   "require-dev": {
     "ext-zlib": "*",
+    "symfony/process": "*",
     "nunomaduro/phpinsights": "^2.11",
     "phpstan/phpstan": "^1.12",
     "squizlabs/php_codesniffer": "^3.7",
@@ -65,6 +70,7 @@
     ]
   },
   "suggest": {
-    "phpunit/phpunit": "Required by PHP Unit helpers"
+    "phpunit/phpunit": "Required by PHP Unit helpers",
+    "symfony/process": "Required by by etxernal process helpers"
   }
 }

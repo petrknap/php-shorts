@@ -20,6 +20,7 @@ final class ReadmeTest extends TestCase implements PhpUnit\MarkdownFileTestInter
         return [
             'exceptioncouldnotprocessdata-template' => '',
             'exceptionnotimplemented' => '',
+            'filtercommand' => 'INPUT',
             'hasrequirements-trait' => '',
         ];
     }

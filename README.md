@@ -3,6 +3,7 @@
 * `Exception`s
   * [`CouldNotProcessData` template](#exceptioncouldnotprocessdata-template)
   * [`NotImplemented`](#exceptionnotimplemented)
+* [`FilterCommand`](#filtercommand)
 * [`HasRequirements` trait](#hasrequirements-trait)
 
 ## [`Exception\CouldNotProcessData` template](./src/Exception/CouldNotProcessData.php)
@@ -36,6 +37,16 @@ final class StringablePrototype implements \Stringable {
         Exception\NotImplemented::throw(__METHOD__);
     }
 }
+```
+
+## [`FilterCommand`](./src/FilterCommand.php)
+
+Object used to filter input using an external command.
+
+```php
+namespace PetrKnap\Shorts;
+
+echo (new FilterCommand('tr', ['a-z', 'A-Z']))->filter('input');  # echo "input" | tr a-z A-Z
 ```
 
 ## [`HasRequirements` trait](./src/HasRequirements.php)
