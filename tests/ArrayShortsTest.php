@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PetrKnap\Shorts;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 final class ArrayShortsTest extends TestCase
 {
-    /**
-     * @group ArrayShorts::keyMap
-     * @dataProvider dataAppliesCallbackToElementSpecifiedByKeyOfGivenArray
-     */
+    #[Group('ArrayShorts::keyMap')]
+    #[DataProvider('dataAppliesCallbackToElementSpecifiedByKeyOfGivenArray')]
     public function testAppliesCallbackToElementSpecifiedByKeyOfGivenArray(string $key, string $expect): void
     {
         $expected = $array = [
@@ -30,7 +30,7 @@ final class ArrayShortsTest extends TestCase
         ];
     }
 
-    /** @group ArrayShorts::keyMap */
+    #[Group('ArrayShorts::keyMap')]
     public function testAppliesCallbackToElementsSpecifiedByKeysOfGivenArray(): void
     {
         $array = [
