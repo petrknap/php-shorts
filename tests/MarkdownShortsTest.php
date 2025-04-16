@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PetrKnap\Shorts;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 final class MarkdownShortsTest extends TestCase
 {
-    /** @group MarkdownShorts::evaluatePhpExample */
+    #[Group('MarkdownShorts::evaluatePhpExample')]
     public function testEvaluatesGivenExampleAsPhpCodeAndReturnsOutput(): void
     {
         self::assertSame(
@@ -17,7 +18,7 @@ final class MarkdownShortsTest extends TestCase
         );
     }
 
-    /** @group MarkdownShorts::evaluatePhpExample */
+    #[Group('MarkdownShorts::evaluatePhpExample')]
     public function testEvaluatesGivenExamplesAsPhpCodeInSharedContextAndReturnsOutput(): void
     {
         MarkdownShorts::evaluatePhpExample('function f(int $x): int { return $x + 1; }');
@@ -27,7 +28,7 @@ final class MarkdownShortsTest extends TestCase
         );
     }
 
-    /** @group MarkdownShorts::extractPhpExamples */
+    #[Group('MarkdownShorts::extractPhpExamples')]
     public function testExtractsPhpExamplesFromGivenContent(): void
     {
         self::assertSame(

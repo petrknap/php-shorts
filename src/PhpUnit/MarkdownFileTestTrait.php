@@ -6,6 +6,7 @@ namespace PetrKnap\Shorts\PhpUnit;
 
 use OutOfRangeException;
 use PetrKnap\Shorts\MarkdownShorts;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Traversable;
 
@@ -16,7 +17,7 @@ use Traversable;
  */
 trait MarkdownFileTestTrait
 {
-    /** @dataProvider dataPhpExamplesGivenInMarkdownFileWork */
+    #[DataProvider('dataPhpExamplesGivenInMarkdownFileWork')]
     public function testPhpExamplesGivenInMarkdownFileWork(string $example, ?string $expectedOutput): void
     {
         if ($expectedOutput === null) {
