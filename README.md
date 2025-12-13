@@ -1,21 +1,25 @@
 # Set of short PHP helpers
 
-* `Exception`s
-  * [`CouldNotProcessData` template](#exceptioncouldnotprocessdata-template)
-  * [`NotImplemented`](#exceptionnotimplemented)
+* [Exceptions](#exceptions)
+  * [`CouldNotProcessData` template](#couldnotprocessdata-template)
+  * [`NotImplemented`](#notimplemented)
 * [`HasRequirements` trait](#hasrequirements-trait)
+* [PHPUnit](#phpunit)
+  * [`MarkdownFileTest` interface + trait](#markdownfiletest-interface--trait)
 
-## [`Exception\CouldNotProcessData` template](./src/Exception/CouldNotProcessData.php)
+
+
+## Exceptions
+
+
+### [`CouldNotProcessData` template](./src/Exception/CouldNotProcessData.php)
 
 Template for an exception that indicates that the data could not be processed.
 
 ```php
-namespace PetrKnap\Shorts;
+interface ImageResizerException extends Throwable {}
 
-interface ImageResizerException extends \Throwable {}
-
-/** @extends Exception\CouldNotProcessData<string> */
-final class ImageResizerCouldNotResizeImage extends Exception\CouldNotProcessData implements ImageResizerException {}
+final class ImageResizerCouldNotResizeImage extends PetrKnap\Shorts\Exception\CouldNotProcessData implements ImageResizerException {}
 
 final class ImageResizer {
     public function resize(string $image) {
@@ -24,29 +28,28 @@ final class ImageResizer {
 }
 ```
 
-## [`Exception\NotImplemented`](./src/Exception/NotImplemented.php)
+
+### [`NotImplemented`](./src/Exception/NotImplemented.php)
 
 Simple exception for prototyping purposes.
 
 ```php
-namespace PetrKnap\Shorts;
-
-final class StringablePrototype implements \Stringable {
+final class StringablePrototype implements Stringable {
     public function __toString(): string {
-        Exception\NotImplemented::throw(__METHOD__);
+        PetrKnap\Shorts\Exception\NotImplemented::throw(__METHOD__);
     }
 }
 ```
+
+
 
 ## [`HasRequirements` trait](./src/HasRequirements.php)
 
 Simple trait to check if requirements of your code are fulfilled.
 
 ```php
-namespace PetrKnap\Shorts;
-
 final class ServiceWithRequirements {
-    use HasRequirements;
+    use PetrKnap\Shorts\HasRequirements;
     
     public function __construct() {
         self::checkRequirements(functions: ['required_function']);
@@ -60,6 +63,33 @@ final class ServiceWithRequirements {
 
 It should not replace [Composers](https://getcomposer.org/) [`require`s](https://getcomposer.org/doc/04-schema.md#require),
 but it could improve them and check [`suggest`s](https://getcomposer.org/doc/04-schema.md#suggest).
+
+
+
+## PHPUnit
+
+
+### [`MarkdownFileTest` interface](./src/PhpUnit/MarkdownFileTestInterface.php) + [trait](./src/PhpUnit/MarkdownFileTestTrait.php)
+
+The interface and trait let you automatically test code examples in a Markdown file like `README.md`.
+
+```php
+final class ReadmeTest extends PHPUnit\Framework\TestCase implements PetrKnap\Shorts\PhpUnit\MarkdownFileTestInterface {
+    use PetrKnap\Shorts\PhpUnit\MarkdownFileTestTrait;
+
+    public static function getPathToMarkdownFile(): string {
+        return __DIR__ . '/../README.md';
+    }
+
+    public static function getExpectedOutputsOfPhpExamples(): array {
+        return [
+            'some example' => 'has this output',
+        ];
+    }
+}
+```
+
+By specifying the file path and expected outputs, the trait runs each code block and checks that its output matches, keeping documentation examples correct and up‑to‑date.
 
 ---
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PetrKnap\Shorts\PhpUnit;
 
-use OutOfRangeException;
 use PetrKnap\Shorts\MarkdownShorts;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -12,48 +11,64 @@ use Traversable;
 
 /**
  * @psalm-require-implements MarkdownFileTestInterface
+ * @psalm-require-extends TestCase
  *
  * @mixin TestCase
  */
 trait MarkdownFileTestTrait
 {
+    /**
+     * @todo BC change $expectedOutput type to string (not null)
+     */
     #[DataProvider('dataPhpExamplesGivenInMarkdownFileWork')]
     public function testPhpExamplesGivenInMarkdownFileWork(string $example, ?string $expectedOutput): void
     {
-        if ($expectedOutput === null) {
+        if ($expectedOutput === MarkdownFileTestInterface::LEGACY_SKIPPED) { // @todo BC remove this way to ignore example
             self::markTestSkipped();
         }
         static::assertSame(
             $expectedOutput,
-            MarkdownShorts::evaluatePhpExample($example)
+            MarkdownShorts::evaluatePhpCodeBlock($example),
         );
     }
 
     public static function dataPhpExamplesGivenInMarkdownFileWork(): iterable
     {
         $pathToMarkdownFile = static::getPathToMarkdownFile();
-        $examples = MarkdownShorts::extractPhpExamples(file_get_contents($pathToMarkdownFile));
+        $markdownFileContent = file_get_contents($pathToMarkdownFile);
+        $phpCodeBlocks = MarkdownShorts::extractPhpCodeBlocks($markdownFileContent);
+        $languagelessCodeBlocks = MarkdownShorts::extractLanguagelessCodeBlocks($markdownFileContent);
         $expectedOutputs = static::getExpectedOutputsOfPhpExamples();
 
+        if ($languagelessCodeBlocks instanceof Traversable) {
+            $languagelessCodeBlocks = iterator_to_array($languagelessCodeBlocks);
+        }
         if ($expectedOutputs instanceof Traversable) {
             $expectedOutputs = iterator_to_array($expectedOutputs);
         }
 
-        foreach ($examples as $example) {
+        foreach ($phpCodeBlocks as $index => $phpCodeBlock) {
             $expectedOutputId = array_key_first($expectedOutputs);
             $expectedOutput = array_shift($expectedOutputs);
 
             if ($expectedOutputId === null) {
-                throw new class ('Missing expect') extends OutOfRangeException implements Exception\MarkdownFileTestException {
-                };
+                throw new Exception\MarkdownFileTestTraitCannotDetermineExpectedOutput('PHP', $index);
             }
 
-            yield "{$pathToMarkdownFile}#{$expectedOutputId}" => [$example, $expectedOutput];
+            if ($expectedOutput === MarkdownFileTestInterface::IGNORED) {
+                continue;
+            }
+
+            if ($expectedOutput === MarkdownFileTestInterface::OUTPUT_IN_MARKDOWN) {
+                $expectedOutput = $languagelessCodeBlocks[$index + 1]
+                    ?? throw new Exception\MarkdownFileTestTraitCannotDetermineExpectedOutput('PHP', $index);
+            }
+
+            yield "{$pathToMarkdownFile}#{$expectedOutputId}" => [$phpCodeBlock, $expectedOutput];
         }
 
-        if (!empty($expectedOutputs)) {
-            throw throw new class ('Missing example') extends OutOfRangeException implements Exception\MarkdownFileTestException {
-            };
+        if ($expectedOutputs !== []) {
+            throw new Exception\MarkdownFileTestTraitDidNotUseAllExpectedOutputs($expectedOutputs);
         }
     }
 

@@ -9,35 +9,50 @@ use PHPUnit\Framework\TestCase;
 
 final class MarkdownShortsTest extends TestCase
 {
-    #[Group('MarkdownShorts::evaluatePhpExample')]
-    public function testEvaluatesGivenExampleAsPhpCodeAndReturnsOutput(): void
+    #[Group('MarkdownShorts::evaluatePhpCodeBlock')]
+    public function testEvaluatesGivenCodeBlockAsPhpAndReturnsOutput(): void
     {
         self::assertSame(
             'NULL' . PHP_EOL,
-            MarkdownShorts::evaluatePhpExample('var_dump(null);')
+            MarkdownShorts::evaluatePhpCodeBlock('var_dump(null);')
         );
     }
 
-    #[Group('MarkdownShorts::evaluatePhpExample')]
-    public function testEvaluatesGivenExamplesAsPhpCodeInSharedContextAndReturnsOutput(): void
+    #[Group('MarkdownShorts::evaluatePhpCodeBlock')]
+    public function testEvaluatesGivenCodeBlocksAsPhpInSharedContextAndReturnsOutput(): void
     {
-        MarkdownShorts::evaluatePhpExample('function f(int $x): int { return $x + 1; }');
+        MarkdownShorts::evaluatePhpCodeBlock('function f(int $x): int { return $x + 1; }');
         self::assertSame(
             'int(2)' . PHP_EOL,
-            MarkdownShorts::evaluatePhpExample('var_dump(f(1));')
+            MarkdownShorts::evaluatePhpCodeBlock('var_dump(f(1));')
         );
     }
 
-    #[Group('MarkdownShorts::extractPhpExamples')]
-    public function testExtractsPhpExamplesFromGivenContent(): void
+    #[Group('MarkdownShorts::extractCodeBlocks')]
+    public function testExtractsPhpCodeBlocksFromGivenContent(): void
     {
         self::assertSame(
             [
-                $this->fileGetContents('file.md.php_0.txt'),
-                $this->fileGetContents('file.md.php_1.txt'),
+                3 => $this->fileGetContents('file.md.3.txt'),
+                4 => $this->fileGetContents('file.md.4.txt'),
             ],
             iterator_to_array(
-                MarkdownShorts::extractPhpExamples(
+                MarkdownShorts::extractPhpCodeBlocks(
+                    $this->fileGetContents('file.md')
+                )
+            )
+        );
+    }
+
+    #[Group('MarkdownShorts::extractCodeBlocks')]
+    public function testExtractsLanguagelessCodeBlocksFromGivenContent(): void
+    {
+        self::assertSame(
+            [
+                1 => $this->fileGetContents('file.md.1.txt'),
+            ],
+            iterator_to_array(
+                MarkdownShorts::extractLanguagelessCodeBlocks(
                     $this->fileGetContents('file.md')
                 )
             )
