@@ -10,6 +10,8 @@ use PHPUnit\Framework\TestCase;
 use Traversable;
 
 /**
+ * @todo BC move it to Testing
+ *
  * @psalm-require-implements MarkdownFileTestInterface
  * @psalm-require-extends TestCase
  *

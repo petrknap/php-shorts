@@ -4,7 +4,8 @@
   * [`CouldNotProcessData` template](#couldnotprocessdata-template)
   * [`NotImplemented`](#notimplemented)
 * [`HasRequirements` trait](#hasrequirements-trait)
-* [PHPUnit](#phpunit)
+* [Testing](#testing)
+  * [`IlluminateDatabase` helper](#illuminatedatabase-helper)
   * [`MarkdownFileTest` interface + trait](#markdownfiletest-interface--trait)
 
 
@@ -66,7 +67,26 @@ but it could improve them and check [`suggest`s](https://getcomposer.org/doc/04-
 
 
 
-## PHPUnit
+## Testing
+
+
+### [`IlluminateDatabase` helper](./src/Testing/IlluminateDatabase.php)
+
+Simple helper which provides logic to test `Illuminate\Database` without `Laravel` mess.
+
+```php
+$pdo = new PDO('sqlite::memory:');
+$pdo->exec('CREATE TABLE tigers (id INTEGER PRIMARY KEY, name VARCHAR)');
+$pdo->prepare('INSERT INTO tigers (name) VALUES (?), (?), (?)')
+    ->execute(['Roque', 'Jasper', 'Gopal']);
+
+PetrKnap\Shorts\Testing\IlluminateDatabase::createCapsuleManager($pdo)
+    ->bootEloquent();
+
+class Tiger extends Illuminate\Database\Eloquent\Model {}
+
+assert(Tiger::count() === 3);
+```
 
 
 ### [`MarkdownFileTest` interface](./src/PhpUnit/MarkdownFileTestInterface.php) + [trait](./src/PhpUnit/MarkdownFileTestTrait.php)
