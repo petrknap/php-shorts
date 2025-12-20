@@ -18,8 +18,9 @@ final class MarkdownFileTestTest extends TestCase implements MarkdownFileTestInt
     public static function getExpectedOutputsOfPhpExamples(): iterable
     {
         return [
-            'tested-example' => 'Hello, World!',
-            'skipped-example' => null,
+            'tested-examples (without output)' => 'this will be executed and compared to value provided by test class' . PHP_EOL,
+            'tested-examples (with output)' => self::OUTPUT_IN_MARKDOWN,
+            'ignored-example' => self::IGNORED,
         ];
     }
 }
