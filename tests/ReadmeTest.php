@@ -21,6 +21,7 @@ final class ReadmeTest extends TestCase implements PhpUnit\MarkdownFileTestInter
             Exception\CouldNotProcessData::class => '',
             Exception\NotImplemented::class => '',
             HasRequirements::class => '',
+            Testing\IlluminateDatabase::class => '',
             PhpUnit\MarkdownFileTestInterface::class => '',
         ];
     }

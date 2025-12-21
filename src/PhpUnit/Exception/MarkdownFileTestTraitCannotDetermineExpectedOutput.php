@@ -8,6 +8,8 @@ use OutOfRangeException;
 use PetrKnap\Shorts\PhpUnit\MarkdownFileTestTrait;
 
 /**
+ * @todo BC move it to Testing
+ *
  * @internal used by {@see MarkdownFileTestTrait}
  */
 final class MarkdownFileTestTraitCannotDetermineExpectedOutput extends OutOfRangeException implements MarkdownFileTestException
