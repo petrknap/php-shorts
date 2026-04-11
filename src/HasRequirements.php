@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace PetrKnap\Shorts;
 
+/**
+ * @todo BC remove it
+ *
+ * @deprecated use {@link https://github.com/petrknap/php-has-requirements}
+ */
 trait HasRequirements
 {
     /**

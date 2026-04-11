@@ -6,6 +6,11 @@ namespace PetrKnap\Shorts\Exception;
 
 use LogicException;
 
+/**
+ * @todo BC remove it
+ *
+ * @deprecated use {@link https://github.com/petrknap/php-has-requirements}
+ */
 final class MissingRequirement extends LogicException implements Exception
 {
     /**
